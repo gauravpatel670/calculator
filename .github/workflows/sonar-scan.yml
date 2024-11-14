@@ -21,6 +21,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
+        distribution: 'adoptopenjdk'  # Add this line to specify the JDK distribution (use 'adoptopenjdk', 'zulu', 'openjdk', etc.)
 
     - name: Run SonarQube Scanner
       uses: sonarsource/sonarqube-scan-action@v3
