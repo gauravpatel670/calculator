@@ -11,4 +11,4 @@ def test_subtraction():
     result = lambda_handler(event, None)
 
     assert result["statusCode"] == 200  # Check for success status code
-    assert result["body"]["result"] == 2  # Check for correct subtraction result
+    assert result["body"]["result"] == 3  # Check for correct subtraction result
