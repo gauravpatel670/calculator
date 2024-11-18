@@ -33,3 +33,14 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Upload pytest results 
+        run: |
+          pytest --maxfail=1 --disable-warnings --junitxml=pytest-results.xml
+        if: always()  # Ensure this runs regardless of tox or coverage step result
+
+      # Upload the coverage report as an artifact (optional)
+      - name: Upload coverage report as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage.xml  # Path to the coverage XML report
