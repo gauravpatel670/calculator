@@ -11,6 +11,9 @@ jobs:
     name: Run Tests and Generate Coverage
     runs-on: ubuntu-latest
 
+    env:
+      PYTHONPATH: ${{ github.workspace }}  # Set the PYTHONPATH to the GitHub workspace
+
     steps:
       # Step 1: Checkout the code from the repository
       - name: Checkout code
