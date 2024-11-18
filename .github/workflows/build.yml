@@ -53,6 +53,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # SonarQube server URL from secrets
         with:
           args: |
-            sonar-scanner -Dsonar.tests=.  
-            sonar-scanner -Dsonar.junit.reportPaths=test-results.xml  
-            sonar-scanner -Dsonar.python.coverage.reportPaths=coverage.xml  
+            sonar-scanner -D sonar.tests=.  
+            sonar-scanner -D sonar.junit.reportPaths=test-results.xml  
+            sonar-scanner -D sonar.python.coverage.reportPaths=coverage.xml  
