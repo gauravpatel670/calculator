@@ -38,9 +38,6 @@ jobs:
           coverage xml  # This generates the coverage report after tox runs, even if tox fails
         if: always()  # This ensures the report is generated even if the previous step failed
 
-      
-     
-
       # Upload the coverage report as an artifact (optional)
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v3
