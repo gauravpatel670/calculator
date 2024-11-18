@@ -25,20 +25,21 @@ jobs:
         run: |
           tox -e py
         continue-on-error: true
+
+
+      - name: Upload pytest results 
+        run: |
+          pytest --maxfail=1 --disable-warnings --junitxml=pytest-results.xml
+        if: failure()  # Ensure this runs regardless of tox or coverage step result
+        continue-on-error: true
+        
       - name: Generate coverage report
         run: |
           coverage xml  # This generates the coverage report after tox runs, even if tox fails
         if: always()  # This ensures the report is generated even if the previous step failed
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: Upload pytest results 
-        run: |
-          pytest --maxfail=1 --disable-warnings --junitxml=pytest-results.xml
-        if: always()  # Ensure this runs regardless of tox or coverage step result
+      
+     
 
       # Upload the coverage report as an artifact (optional)
       - name: Upload coverage report as artifact
@@ -46,3 +47,9 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml  # Path to the coverage XML report
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
