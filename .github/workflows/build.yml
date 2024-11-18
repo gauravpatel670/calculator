@@ -52,7 +52,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarQube token from secrets
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # SonarQube server URL from secrets
         with:
-          extra_args: |
+          args: |
             -Dsonar.tests=.  # Tell SonarQube where your tests are located
             -Dsonar.junit.reportPaths=test-results.xml  # Path to test results in JUnit format
             -Dsonar.python.coverage.reportPaths=coverage.xml  # Path to coverage report
