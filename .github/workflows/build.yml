@@ -35,6 +35,8 @@ jobs:
       - name: Run all tests and generate coverage report
         run: |
           pytest --maxfail=5 --disable-warnings --cov=. --cov-report=xml:coverage.xml --junitxml=test-results.xml  # Run tests and generate coverage and test result reports
+      - name: Debug: List files
+        run: ls -R
 
   build:
     name: Build and Analyze with SonarQube
