@@ -26,7 +26,7 @@ jobs:
 
       - name: Run all test cases
         run: |
-          pytest --maxfail=5 --disable-warnings --cov=your_module --cov-report=xml:coverage.xml --junitxml=test-results.xml  # Generate coverage.xml
+          pytest --maxfail=5 --disable-warnings --cov=. --cov-report=xml:coverage.xml --junitxml=test-results.xml  # Generate coverage.xml
 
   build:
     name: Build and Analyze with SonarQube
