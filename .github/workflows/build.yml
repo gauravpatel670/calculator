@@ -1,5 +1,20 @@
 name: Build and Run Tests
+[tox]
+envlist = py39
+skipsdist = True
 
+[testenv]
+deps =
+    pytest
+    coverage
+commands =
+    coverage run -m pytest
+    coverage xml
+
+[coverage:run]
+relative_files = True
+source = my_project/
+branch = True
 on:
   push:
     branches:
@@ -53,6 +68,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # SonarQube server URL from secrets
         with:
           args: |
-            -Dsonar.tests=.  
-            -Dsonar.junit.reportPaths=test-results.xml  
-            -Dsonar.python.coverage.reportPaths=coverage.xml  
+            sonar-scanner -Dsonar.tests=.  
+            sonar-scanner -Dsonar.junit.reportPaths=test-results.xml  
+            sonar-scanner -Dsonar.python.coverage.reportPaths=coverage.xml  
