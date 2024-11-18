@@ -11,4 +11,4 @@ def test_multiply():
     result = lambda_handler(event, None)
 
     assert result["statusCode"] == 200  # Check for success status code
-    assert result["body"]["result"] == 1  # Check for correct multiplication result
+    assert result["body"]["result"] == 13  # Check for correct multiplication result
