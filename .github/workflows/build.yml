@@ -19,6 +19,8 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install tox and any other packages
         run: pip install tox pytest coverage
+      - name: Set PYTHONPATH to current directory
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
       - name: Run tox
         run: |
           tox -e py
