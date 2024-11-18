@@ -32,7 +32,13 @@ jobs:
           pytest --maxfail=1 --disable-warnings --junitxml=pytest-results.xml
         if: failure()  # Ensure this runs regardless of tox or coverage step result
         continue-on-error: true
-        
+
+      - name: Upload pytest artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: pytest-results.xml
+      
       - name: Generate coverage report
         run: |
           coverage xml  # This generates the coverage report after tox runs, even if tox fails
