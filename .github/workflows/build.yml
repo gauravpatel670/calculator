@@ -29,7 +29,7 @@ jobs:
 
       - name: Upload pytest results 
         run: |
-          pytest --disable-warnings --junitxml=pytest-results.xml
+          pytest --disable-warnings --junitxml=pytestresult.xml
         if: always()  # Ensure this runs regardless of tox or coverage
         continue-on-error: true
 
@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pytest-results
-          path: pytest-results.xml
+          path: pytestresult.xml
       
       - name: Generate coverage report
         run: |
