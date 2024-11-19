@@ -30,7 +30,7 @@ jobs:
       - name: Upload pytest results 
         run: |
           pytest --maxfail=1 --disable-warnings --junitxml=pytest-results.xml --cov=src --cov-report=xml
-        if: failure()  # Ensure this runs regardless of tox or coverage step result
+        if: failure()  # Ensure this runs regardless of tox or coverage
         continue-on-error: true
 
       - name: Upload pytest artifact
