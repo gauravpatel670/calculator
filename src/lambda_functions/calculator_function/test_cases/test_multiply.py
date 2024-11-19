@@ -10,4 +10,4 @@ def test_multiply():
     }
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 200 and result["body"]["result"] == 12  # Check for correct multiplication result
+    assert result["statusCode"] == 200 and result["body"]["result"] == 123  # Check for correct multiplication result
