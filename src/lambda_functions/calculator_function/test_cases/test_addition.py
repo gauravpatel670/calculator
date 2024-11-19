@@ -22,7 +22,7 @@ def test_addition_with_missing_second_number():
     result = lambda_handler(event, None)
 
     assert result["statusCode"] == 400
-    assert result["body"]["error"] == "Both numbers are required for this operation."
+    assert result["body"]["error"] == "Both numbers are required"
 
 def test_addition_with_missing_first_number():
     event = {
@@ -33,7 +33,7 @@ def test_addition_with_missing_first_number():
 
     result = lambda_handler(event, None)
     assert result["statusCode"] == 400
-    assert result["body"]["error"] == "Both numbers are required for this operation."
+    assert result["body"]["error"] == "Both numbers are required"
 
 def test_addition_with_missing_both_number():
     event = {
@@ -45,4 +45,4 @@ def test_addition_with_missing_both_number():
     result = lambda_handler(event, None)
 
     assert result["statusCode"] == 400
-    assert result["body"]["error"] == "Both numbers are required for this operation."
+    assert result["body"]["error"] == "Both numbers are required"
