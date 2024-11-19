@@ -58,4 +58,4 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.python.xunit.reportPaths=pytestresult.xml
+            -Dsonar.python.xunit.reportPath=pytestresult.xml
