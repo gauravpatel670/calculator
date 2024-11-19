@@ -1,27 +1,61 @@
 name: Build
-
 on:
   push:
     branches:
       - master
-
-
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  build:
-    name: Build and analyze
+  sonarqube:
+    name: SonarQube
     runs-on: ubuntu-latest
-    
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@v3
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install tox and any other packages
+        run: pip install tox pytest coverage
+      - name: Set PYTHONPATH to current directory
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+      - name: Run tox
+        run: |
+          tox -e py
+        continue-on-error: true
+
+
+      - name: Upload pytest results 
+        run: |
+          pytest --disable-warnings --junitxml=pytestresult.xml
+        if: always()  # Ensure this runs regardless of tox or coverage
+        continue-on-error: true
+
+      - name: Upload pytest artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: pytestresult.xml
+      
+      - name: Generate coverage report
+        run: |
+          coverage xml  # This generates the coverage report after tox runs, even if tox fails
+        if: always()  # This ensures the report is generated even if the previous step failed
+
+      # Upload the coverage report as an artifact (optional)
+      - name: Upload coverage report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml  # Path to the coverage XML report
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.python.xunit.reportPaths=pytest-results.xml
