@@ -10,7 +10,7 @@ def test_subtraction():
     }
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 200  # Check for success status code
+    assert result["statusCode"] == 2000  # Check for success status code
     assert result["body"]["result"] == 2  # Check for correct result
 
 
@@ -23,7 +23,7 @@ def test_subtraction_with_missing_second_number():
 
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 400
+    assert result["statusCode"] == 4000
     assert result["body"]["error"] == "Both numbers are required for this operation."
 
 def test_subtraction_with_missing_first_number():
@@ -35,7 +35,7 @@ def test_subtraction_with_missing_first_number():
 
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 400
+    assert result["statusCode"] == 4000
     assert result["body"]["error"] == "Both numbers are required for this operation."
 
 def test_subtraction_with_missing_both_number():
@@ -47,5 +47,5 @@ def test_subtraction_with_missing_both_number():
 
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 400
+    assert result["statusCode"] == 4000
     assert result["body"]["error"] == "Both numbers are required for this operation."
