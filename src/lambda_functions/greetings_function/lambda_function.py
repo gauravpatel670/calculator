@@ -23,16 +23,3 @@ def lambda_handler(event, context):
         }
     }
 
-# Main function for testing locally
-if __name__ == "__main__":
-    # Define a test event
-    test_event = {
-        "first_name": "Jane",
-        "last_name": "Doe"
-    }
-
-    # Call the lambda_handler function with the test event
-    result = lambda_handler(test_event, None)
-
-    # Print the result
-    print(result)

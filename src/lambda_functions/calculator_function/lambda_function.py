@@ -46,19 +46,3 @@ def lambda_handler(event, context):
             "body": {"error": str(e)}
         }
 
-if __name__ == "__main__":
-    # Create an example event to pass to the lambda_handler
-    event = {
-        "operation": "divide",
-        "first_number": 5,
-        "second_number": 2
-    }
-
-    # Context is not required for this basic example, so you can pass None
-    context = None
-
-    # Call the lambda_handler function with the event and context
-    response = lambda_handler(event, context)
-
-    # Print the response from the lambda_handler
-    print(response)
