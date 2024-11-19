@@ -56,4 +56,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_PYTHON_XUNIT_REPORTPATHS: pytest-results.xml
+        with:
+          args: >
+            -Dsonar.python.xunit.reportPaths=pytest-results.xml
