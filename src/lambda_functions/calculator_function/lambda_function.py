@@ -9,12 +9,12 @@ def lambda_handler(event, context):
     first_number = event.get("first_number")
     second_number = event.get("second_number")
 
-    # Check if both numbers are provided
-    if first_number is None or second_number is None:
-        return {
-            "statusCode": 400,
-            "body": {"error": "Both numbers are required for this operation."}
-        }
+    # # Check if both numbers are provided
+    # if first_number is None or second_number is None:
+    #     return {
+    #         "statusCode": 400,
+    #         "body": {"error": "Both numbers are required"}
+    #     }
 
     # Map operation_list to their corresponding classes
     operations = {
