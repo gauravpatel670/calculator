@@ -7,7 +7,7 @@ def test_greet_person():
         "last_name": "Doe"
     }
     result = lambda_handler(event, None)
-    assert result["statusCode"] == 2000
+    assert result["statusCode"] == 200
     assert result["body"]["message"] == "Hello, John Doe! Welcome!"
 
 def test_missing_first_name():
@@ -15,7 +15,7 @@ def test_missing_first_name():
         "last_name": "Doe"
     }
     result = lambda_handler(event, None)
-    assert result["statusCode"] == 4000
+    assert result["statusCode"] == 400
     assert "error" in result["body"]
 
 def test_missing_last_name():
@@ -23,5 +23,5 @@ def test_missing_last_name():
         "first_name": "John"
     }
     result = lambda_handler(event, None)
-    assert result["statusCode"] == 4000
+    assert result["statusCode"] == 400
     assert "error" in result["body"]

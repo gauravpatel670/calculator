@@ -10,7 +10,7 @@ def test_division():
     }
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 2000  # Check for success status code
+    assert result["statusCode"] == 200  # Check for success status code
     assert result["body"]["result"] == 3  # Check for correct division result
 
 
@@ -22,7 +22,7 @@ def test_divide_by_zero():
     }
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 4000  # Check for error status code
+    assert result["statusCode"] == 400  # Check for error status code
     assert "Division by zero" in result["body"]["error"]  # Check for division by zero error message
 
 
@@ -35,7 +35,7 @@ def test_divide_with_missing_second_number():
 
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 4000
+    assert result["statusCode"] == 400
     assert result["body"]["error"] == "Both numbers are required for this operation."
 
 def test_divide_with_missing_first_number():
@@ -46,8 +46,7 @@ def test_divide_with_missing_first_number():
     }
 
     result = lambda_handler(event, None)
-
-    assert result["statusCode"] == 4000
+    assert result["statusCode"] == 400
     assert result["body"]["error"] == "Both numbers are required for this operation."
 
 def test_divide_with_missing_both_number():
@@ -59,5 +58,5 @@ def test_divide_with_missing_both_number():
 
     result = lambda_handler(event, None)
 
-    assert result["statusCode"] == 4000
+    assert result["statusCode"] == 400
     assert result["body"]["error"] == "Both numbers are required for this operation."
