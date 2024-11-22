@@ -6,7 +6,7 @@ def test_division():
     event = {
         "operation": "divide",
         "first_number": 6,
-        "second_number": 2
+        "second_number": 3
     }
     result = lambda_handler(event, None)
 
